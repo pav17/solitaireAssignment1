@@ -7,13 +7,12 @@ public class CardObject : MonoBehaviour
 
     public int Value;
     public string Name;
-    public string Image;
+    public Sprite Image;
 
-    public CardObject(string SetName, int SetValue, string SetImageLocation)
+    public CardObject(string SetName, int SetValue, Sprite SetImageLocation)
     {
         Value = SetValue;
         Name = SetName;
         Image = SetImageLocation;
-        
     }
 }

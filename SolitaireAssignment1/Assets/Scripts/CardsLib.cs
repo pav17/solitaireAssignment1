@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,11 +63,78 @@ public class CardsLib : MonoBehaviour
 
 
 
-    public Dictionary<int, CardObject> BuildDeck()
+    public List<CardObject> BuildDeck()
     {
-        var UnshuffledDeck = new Dictionary<int, CardObject>();
-        UnshuffledDeck.Add(0, new CardObject("Ace of Clubs", 1, "/"));
+        var UnshuffledDeck = new List<CardObject>();
+        UnshuffledDeck.Add(new CardObject("Ace of Clubs", 1, aceClubs));
+        UnshuffledDeck.Add(new CardObject("Two of Clubs", 2, twoClubs));
+        UnshuffledDeck.Add(new CardObject("Three of Clubs", 3, threeClubs));
+        UnshuffledDeck.Add(new CardObject("Four of Clubs", 4, fourClubs));
+        UnshuffledDeck.Add(new CardObject("Five of Clubs", 5, fiveClubs));
+        UnshuffledDeck.Add(new CardObject("Six of Clubs", 6, sixClubs));
+        UnshuffledDeck.Add(new CardObject("Seven of Clubs", 7, sevenClubs));
+        UnshuffledDeck.Add(new CardObject("Eight of Clubs", 8, eightClubs));
+        UnshuffledDeck.Add(new CardObject("Nine of Clubs", 9, nineClubs));
+        UnshuffledDeck.Add(new CardObject("Ten of Clubs", 10, tenClubs));
+        UnshuffledDeck.Add(new CardObject("Jack of Clubs", 10, jackClubs));
+        UnshuffledDeck.Add(new CardObject("Queen of Clubs", 10, queenClubs));
+        UnshuffledDeck.Add(new CardObject("King of Clubs", 10, kingClubs));
+        UnshuffledDeck.Add(new CardObject("Ace of Diamonds", 1, aceDiamonds));
+        UnshuffledDeck.Add(new CardObject("Two of Diamonds", 2, twoDiamonds));
+        UnshuffledDeck.Add(new CardObject("Three of Diamonds", 3, threeDiamonds));
+        UnshuffledDeck.Add(new CardObject("Four of Diamonds", 4, fourDiamonds));
+        UnshuffledDeck.Add(new CardObject("Five of Diamonds", 5, fiveDiamonds));
+        UnshuffledDeck.Add(new CardObject("Six of Diamonds", 6, sixDiamonds));
+        UnshuffledDeck.Add(new CardObject("Seven of Diamonds", 7, sevenDiamonds));
+        UnshuffledDeck.Add(new CardObject("Eight of Diamonds", 8, eightDiamonds));
+        UnshuffledDeck.Add(new CardObject("Nine of Diamonds", 9, nineDiamonds));
+        UnshuffledDeck.Add(new CardObject("Ten of Diamonds", 10, tenDiamonds));
+        UnshuffledDeck.Add(new CardObject("Jack of Diamonds", 10, jackDiamonds));
+        UnshuffledDeck.Add(new CardObject("Queen of Diamonds", 10, queenDiamonds));
+        UnshuffledDeck.Add(new CardObject("King of Diamonds", 10, kingDiamonds));
+        UnshuffledDeck.Add(new CardObject("Ace of Hearts", 1, aceHearts));
+        UnshuffledDeck.Add(new CardObject("Two of Hearts", 2, twoHearts));
+        UnshuffledDeck.Add(new CardObject("Three of Hearts", 3, threeHearts));
+        UnshuffledDeck.Add(new CardObject("Four of Hearts", 4, fourHearts));
+        UnshuffledDeck.Add(new CardObject("Five of Hearts", 5, fiveHearts));
+        UnshuffledDeck.Add(new CardObject("Six of Hearts", 6, sixHearts));
+        UnshuffledDeck.Add(new CardObject("Seven of Hearts", 7, sevenHearts));
+        UnshuffledDeck.Add(new CardObject("Eight of Hearts", 8, eightHearts));
+        UnshuffledDeck.Add(new CardObject("Nine of Hearts", 9, nineHearts));
+        UnshuffledDeck.Add(new CardObject("Ten of Hearts", 10, tenHearts));
+        UnshuffledDeck.Add(new CardObject("Jack of Hearts", 10, jackHearts));
+        UnshuffledDeck.Add(new CardObject("Queen of Hearts", 10, queenHearts));
+        UnshuffledDeck.Add(new CardObject("King of Hearts", 10, kingHearts));
+        UnshuffledDeck.Add(new CardObject("Ace of Spades", 1, aceSpades));
+        UnshuffledDeck.Add(new CardObject("Two of Spades", 2, twoSpades));
+        UnshuffledDeck.Add(new CardObject("Three of Spades", 3, threeSpades));
+        UnshuffledDeck.Add(new CardObject("Four of Spades", 4, fourSpades));
+        UnshuffledDeck.Add(new CardObject("Five of Spades", 5, fiveSpades));
+        UnshuffledDeck.Add(new CardObject("Six of Spades", 6, sixSpades));
+        UnshuffledDeck.Add(new CardObject("Seven of Spades", 7, sevenSpades));
+        UnshuffledDeck.Add(new CardObject("Eight of Spades", 8, eightSpades));
+        UnshuffledDeck.Add(new CardObject("Nine of Spades", 9, nineSpades));
+        UnshuffledDeck.Add(new CardObject("Ten of Spades", 10, tenSpades));
+        UnshuffledDeck.Add(new CardObject("Jack of Spades", 10, jackSpades));
+        UnshuffledDeck.Add(new CardObject("Queen of Spades", 10, queenSpades));
+        UnshuffledDeck.Add(new CardObject("King of Spades", 10, kingSpades));
+        /*
+        UnshuffledDeck.Add(52, new CardObject("Joker", 0, joker));
+        UnshuffledDeck.Add(53, new CardObject("Joker", 0, joker));
+        */
         return (UnshuffledDeck);
+    }
+
+    public Stack<CardObject> ShuffleDeck(List<CardObject> UnshuffledDeck)
+    {
+        var ShuffledDeck = new Stack<CardObject>();
+        System.Random rand = new System.Random();
+        for (int i = 0; i < UnshuffledDeck.Count; i++)
+        {
+            int r = rand.Next(UnshuffledDeck.Count);
+            ShuffledDeck.Push(UnshuffledDeck[r]);
+        }
+        return (ShuffledDeck);
     }
 
     void Awake()
