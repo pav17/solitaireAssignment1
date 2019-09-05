@@ -129,7 +129,8 @@ public class CardsLib : MonoBehaviour
     {
         var ShuffledDeck = new Stack<CardObject>();
         System.Random rand = new System.Random();
-        for (int i = 0; i < UnshuffledDeck.Count; i++)
+        int shuffleCount = UnshuffledDeck.Count;
+        for (int i = 0; i < shuffleCount; i++)
         {
             int r = rand.Next(UnshuffledDeck.Count);
             ShuffledDeck.Push(UnshuffledDeck[r]);
