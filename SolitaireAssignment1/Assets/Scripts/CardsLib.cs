@@ -143,7 +143,6 @@ public class CardsLib : MonoBehaviour
     {
         if (definitions == null)
         {
-            DontDestroyOnLoad(gameObject); //makes instance persist across scenes
             definitions = this;
         }
         else if (definitions != this)

@@ -27,6 +27,11 @@ public class GameController : MonoBehaviour
 
     public Text DeckCount;
     public Text DiscardCount;
+    public Text ShuffleCount;
+
+    public Text OutcomeText;
+    public Text FinalScoreText;
+    public Button NewGameButton;
 
     public bool PlayFromDiscardFlag = false;
     public bool PlayFromPileFlag = false;
@@ -53,9 +58,15 @@ public class GameController : MonoBehaviour
     public Text Pile3Score;
     public Text Pile4Score;
 
+    public int DeckShuffles = 0;
+    public bool EndFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        OutcomeText.gameObject.SetActive(false);
+        FinalScoreText.gameObject.SetActive(false);
+        NewGameButton.gameObject.SetActive(false);
         PlaceholderCard = new CardObject(0, 0, 0, placeholderCardImage);
         UnshuffledDeck = CardsLib.definitions.BuildDeck();
         ShuffledDeck = CardsLib.definitions.ShuffleDeck(UnshuffledDeck);
@@ -104,13 +115,19 @@ public class GameController : MonoBehaviour
         Pile3ScoreValue = CalculateScore(Pile3, Pile3ScoreValue);
         Pile4ScoreValue = CalculateScore(Pile4, Pile4ScoreValue);
         DisplayScores();
-
+        /*
         Debug.Log("Discard Flag: " + PlayFromDiscardFlag.ToString());
         Debug.Log("Pile Flag: " + PlayFromPileFlag.ToString());
         Debug.Log("Pile 1 Playable: " + Pile1Playable.ToString());
         Debug.Log("Pile 2 Playable: " + Pile2Playable.ToString());
         Debug.Log("Pile 3 Playable: " + Pile3Playable.ToString());
         Debug.Log("Pile 4 Playable: " + Pile4Playable.ToString());
+        */
+        if(DeckShuffles > 1)
+        {
+            EndFlag = true;
+        }
+        CheckEndCondition();
     }
     
 
@@ -147,6 +164,7 @@ public class GameController : MonoBehaviour
     {
         DeckCount.text = "Cards in Deck: " + GameDeck.Count.ToString();
         DiscardCount.text = "Cards in Discard: " + (DiscardPile.Count - 1).ToString();
+        ShuffleCount.text = "Reshuffles Used: " + DeckShuffles.ToString();
     }
 
     public void PlayFromPile(Stack<CardObject> PileStack, GameObject PileObj, Stack<CardObject> TargetPileStack, GameObject TargetPileObj)
@@ -176,6 +194,14 @@ public class GameController : MonoBehaviour
         return(Score);
     }
 
+    int CalculateFinalScore()
+    {
+        int ComboScore1 = Mathf.Abs(Pile1ScoreValue - Pile2ScoreValue);
+        int ComboScore2 = Mathf.Abs(Pile3ScoreValue - Pile4ScoreValue);
+        int finalScore = Mathf.Abs(ComboScore1 - ComboScore2);
+        return (finalScore);
+    }
+
     void DisplayScores()
     {
         //Debug.Log("Pile 1 Score: " + Pile1ScoreValue.ToString());
@@ -188,11 +214,22 @@ public class GameController : MonoBehaviour
         Pile4Score.text = "Pile Score: " + Pile4ScoreValue.ToString();
     }
 
+    void CheckEndCondition ()
+    {
+        if(EndFlag == true)
+        {
+            OutcomeText.gameObject.SetActive(true);
+            FinalScoreText.gameObject.SetActive(true);
+            NewGameButton.gameObject.SetActive(true);
+            OutcomeText.text = "Game Over";
+            FinalScoreText.text = "Final Score: " + CalculateFinalScore();
+        }
+    }
+
     void Awake()
     {
         if (Controller == null)
         {
-            DontDestroyOnLoad(gameObject); //makes instance persist across scenes
             Controller = this;
         }
         else if (Controller != this)

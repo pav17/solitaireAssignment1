@@ -15,6 +15,7 @@ public class DeckController : MonoBehaviour
         }
         else
         {
+            GameController.Controller.DeckShuffles = GameController.Controller.DeckShuffles + 1;
             int loopLimit = GameController.Controller.DiscardPile.Count;
             for (int i = 0; i < loopLimit; i++)
             {
