@@ -40,6 +40,17 @@ public class GameController : MonoBehaviour
     public bool Pile3Playable = false;
     public bool Pile4Playable = false;
 
+    public GameObject SelectedD;
+    public GameObject Selected1;
+    public GameObject Selected2;
+    public GameObject Selected3;
+    public GameObject Selected4;
+
+    public GameObject Legal1;
+    public GameObject Legal2;
+    public GameObject Legal3;
+    public GameObject Legal4;
+
     public Sprite placeholderCardImage;
     public CardObject PlaceholderCard;
 
@@ -81,6 +92,7 @@ public class GameController : MonoBehaviour
 
         if (PlayFromDiscardFlag)
         {
+            SelectedD.SetActive(true);
             if (Pile1.Peek().Number == DiscardPile.Peek().Number || Pile1.Peek().Suite == DiscardPile.Peek().Suite || Pile1.Count == 1)
             {
                 Pile1Playable = true;
@@ -104,10 +116,48 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            Selected1.SetActive(false);
+            Selected2.SetActive(false);
+            Selected3.SetActive(false);
+            Selected4.SetActive(false);
+            SelectedD.SetActive(false);
             Pile1Playable = false;
             Pile2Playable = false;
             Pile3Playable = false;
             Pile4Playable = false;
+        }
+
+        if(Pile1Playable)
+        {
+            Legal1.SetActive(true);
+        }
+        else
+        {
+            Legal1.SetActive(false);
+        }
+        if (Pile2Playable)
+        {
+            Legal2.SetActive(true);
+        }
+        else
+        {
+            Legal2.SetActive(false);
+        }
+        if (Pile3Playable)
+        {
+            Legal3.SetActive(true);
+        }
+        else
+        {
+            Legal3.SetActive(false);
+        }
+        if (Pile4Playable)
+        {
+            Legal4.SetActive(true);
+        }
+        else
+        {
+            Legal4.SetActive(false);
         }
 
         Pile1ScoreValue = CalculateScore(Pile1, Pile1ScoreValue);

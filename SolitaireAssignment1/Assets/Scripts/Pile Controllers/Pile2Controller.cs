@@ -8,6 +8,7 @@ public class Pile2Controller : MonoBehaviour
     {
         if (GameController.Controller.PlayFromDiscardFlag == false && GameController.Controller.PlayFromPileFlag == false && GameController.Controller.Pile2.Count > 1)
         {
+            GameController.Controller.Selected2.SetActive(true);
             GameController.Controller.PlayFromPileFlag = true;
             GameController.Controller.sourceMoveStack = GameController.Controller.Pile2;
             GameController.Controller.sourceObj = GameController.Controller.Pile2Obj;
