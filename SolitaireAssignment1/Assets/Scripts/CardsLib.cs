@@ -133,6 +133,7 @@ public class CardsLib : MonoBehaviour
         {
             int r = rand.Next(UnshuffledDeck.Count);
             ShuffledDeck.Push(UnshuffledDeck[r]);
+            UnshuffledDeck.RemoveAt(r);
         }
         return (ShuffledDeck);
     }
