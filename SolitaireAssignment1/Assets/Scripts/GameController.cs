@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     public Text DiscardCount;
 
     public bool PlayFromDiscardFlag = false;
+    public bool PlayFromPileFlag = false;
     public bool Pile1Playable = false;
     public bool Pile2Playable = false;
     public bool Pile3Playable = false;
@@ -36,6 +37,11 @@ public class GameController : MonoBehaviour
 
     public Sprite placeholderCardImage;
     public CardObject PlaceholderCard;
+
+    public Stack<CardObject> sourceMoveStack;
+    public Stack<CardObject> targetMoveStack;
+    public GameObject sourceObj;
+    public GameObject targetObj;
 
     // Start is called before the first frame update
     void Start()
@@ -52,9 +58,9 @@ public class GameController : MonoBehaviour
     {
         updateUIelements();
 
-        if(PlayFromDiscardFlag)
+        if (PlayFromDiscardFlag)
         {
-            if(Pile1.Peek().Number == DiscardPile.Peek().Number || Pile1.Peek().Suite == DiscardPile.Peek().Suite)
+            if (Pile1.Peek().Number == DiscardPile.Peek().Number || Pile1.Peek().Suite == DiscardPile.Peek().Suite)
             {
                 Pile1Playable = true;
             }
@@ -78,7 +84,9 @@ public class GameController : MonoBehaviour
             Pile3Playable = false;
             Pile4Playable = false;
         }
+
     }
+    
 
     void StartGame()
     {
@@ -104,7 +112,6 @@ public class GameController : MonoBehaviour
     public void DrawCard(GameObject DiscardObj, Stack<CardObject> DiscardStack, Stack<CardObject> DeckStack)
     {
         CardObject card = DeckStack.Pop();
-        Debug.Log("Drew a " + card.Number + ", " + card.Suite);
         DiscardStack.Push(card);
         DiscardObj.GetComponent<SpriteRenderer>().sprite = DiscardStack.Peek().Image;
     }
@@ -113,6 +120,19 @@ public class GameController : MonoBehaviour
     {
         DeckCount.text = "Cards in Deck: " + GameDeck.Count.ToString();
         DiscardCount.text = "Cards in Discard: " + (DiscardPile.Count - 1).ToString();
+    }
+
+    public void PlayFromPile(Stack<CardObject> PileStack, GameObject PileObj, Stack<CardObject> TargetPileStack, GameObject TargetPileObj)
+    {
+        CardObject card = PileStack.Pop();
+        TargetPileStack.Push(card);
+        PileObj.GetComponent<SpriteRenderer>().sprite = PileStack.Peek().Image;
+        TargetPileObj.GetComponent<SpriteRenderer>().sprite = TargetPileStack.Peek().Image;
+        PlayFromPileFlag = false;
+        Pile1Playable = false;
+        Pile2Playable = false;
+        Pile3Playable = false;
+        Pile4Playable = false;
     }
 
     void Awake()
