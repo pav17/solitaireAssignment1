@@ -8,7 +8,7 @@ public class PileController : MonoBehaviour
     {
         if(GameController.Controller.PlayFromDiscardFlag)
         {
-            if(GameController.Controller.Pile1Playable && gameObject.name == "Pile1")
+            if(GameController.Controller.Pile1Playable == true && gameObject.name == "Pile1")
             {
                 //highlight position
                 CardObject card = GameController.Controller.DiscardPile.Pop();
@@ -17,7 +17,7 @@ public class PileController : MonoBehaviour
                 GameController.Controller.Discard.GetComponent<SpriteRenderer>().sprite = GameController.Controller.DiscardPile.Peek().Image;
                 GameController.Controller.PlayFromDiscardFlag = false;
             }
-            if (GameController.Controller.Pile2Playable && gameObject.name == "Pile2")
+            if (GameController.Controller.Pile2Playable == true && gameObject.name == "Pile2")
             {
                 //highlight position
                 CardObject card = GameController.Controller.DiscardPile.Pop();
@@ -26,7 +26,7 @@ public class PileController : MonoBehaviour
                 GameController.Controller.Discard.GetComponent<SpriteRenderer>().sprite = GameController.Controller.DiscardPile.Peek().Image;
                 GameController.Controller.PlayFromDiscardFlag = false;
             }
-            if (GameController.Controller.Pile3Playable && gameObject.name == "Pile3")
+            if (GameController.Controller.Pile3Playable == true && gameObject.name == "Pile3")
             {
                 //highlight position
                 CardObject card = GameController.Controller.DiscardPile.Pop();
@@ -35,7 +35,7 @@ public class PileController : MonoBehaviour
                 GameController.Controller.Discard.GetComponent<SpriteRenderer>().sprite = GameController.Controller.DiscardPile.Peek().Image;
                 GameController.Controller.PlayFromDiscardFlag = false;
             }
-            if (GameController.Controller.Pile4Playable && gameObject.name == "Pile4")
+            if (GameController.Controller.Pile4Playable == true && gameObject.name == "Pile4")
             {
                 //highlight position
                 CardObject card = GameController.Controller.DiscardPile.Pop();

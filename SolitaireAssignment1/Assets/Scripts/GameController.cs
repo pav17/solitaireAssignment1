@@ -70,22 +70,26 @@ public class GameController : MonoBehaviour
 
         if (PlayFromDiscardFlag)
         {
-            if (Pile1.Peek().Number == DiscardPile.Peek().Number || Pile1.Peek().Suite == DiscardPile.Peek().Suite)
+            if (Pile1.Peek().Number == DiscardPile.Peek().Number || Pile1.Peek().Suite == DiscardPile.Peek().Suite || Pile1.Count == 1)
             {
                 Pile1Playable = true;
             }
-            if (Pile2.Peek().Number == DiscardPile.Peek().Number || Pile2.Peek().Suite == DiscardPile.Peek().Suite)
+            if (Pile2.Peek().Number == DiscardPile.Peek().Number || Pile2.Peek().Suite == DiscardPile.Peek().Suite || Pile2.Count == 1)
             {
                 Pile2Playable = true;
             }
-            if (Pile3.Peek().Number == DiscardPile.Peek().Number || Pile3.Peek().Suite == DiscardPile.Peek().Suite)
+            if (Pile3.Peek().Number == DiscardPile.Peek().Number || Pile3.Peek().Suite == DiscardPile.Peek().Suite || Pile3.Count == 1)
             {
                 Pile3Playable = true;
             }
-            if (Pile4.Peek().Number == DiscardPile.Peek().Number || Pile4.Peek().Suite == DiscardPile.Peek().Suite)
+            if (Pile4.Peek().Number == DiscardPile.Peek().Number || Pile4.Peek().Suite == DiscardPile.Peek().Suite || Pile4.Count == 1)
             {
                 Pile4Playable = true;
             }
+        }
+        else if (PlayFromPileFlag)
+        {
+
         }
         else
         {
@@ -95,11 +99,18 @@ public class GameController : MonoBehaviour
             Pile4Playable = false;
         }
 
-        CalculateScore(Pile1, Pile1Score, Pile1ScoreValue);
-        CalculateScore(Pile2, Pile2Score, Pile2ScoreValue);
-        CalculateScore(Pile3, Pile3Score, Pile3ScoreValue);
-        CalculateScore(Pile4, Pile4Score, Pile4ScoreValue);
+        Pile1ScoreValue = CalculateScore(Pile1, Pile1ScoreValue);
+        Pile2ScoreValue = CalculateScore(Pile2, Pile2ScoreValue);
+        Pile3ScoreValue = CalculateScore(Pile3, Pile3ScoreValue);
+        Pile4ScoreValue = CalculateScore(Pile4, Pile4ScoreValue);
         DisplayScores();
+
+        Debug.Log("Discard Flag: " + PlayFromDiscardFlag.ToString());
+        Debug.Log("Pile Flag: " + PlayFromPileFlag.ToString());
+        Debug.Log("Pile 1 Playable: " + Pile1Playable.ToString());
+        Debug.Log("Pile 2 Playable: " + Pile2Playable.ToString());
+        Debug.Log("Pile 3 Playable: " + Pile3Playable.ToString());
+        Debug.Log("Pile 4 Playable: " + Pile4Playable.ToString());
     }
     
 
@@ -116,6 +127,7 @@ public class GameController : MonoBehaviour
 
     void SetupStack(GameObject PileObj, Stack<CardObject> PileStack, Stack<CardObject> DeckStack)
     {
+        PileStack.Push(new CardObject(0, 0, 0, placeholderCardImage));
         for(int i = 0; i < 4; i++)
         {
             CardObject card = DeckStack.Pop();
@@ -150,23 +162,29 @@ public class GameController : MonoBehaviour
         Pile4Playable = false;
     }
 
-    void CalculateScore(Stack<CardObject> PileStack, Text Display, int Score)
+    int CalculateScore(Stack<CardObject> PileStack, int Score)
     {
         CardObject[] PileArray = PileStack.ToArray();
         int ArrayLength = PileArray.Length;
         int PileScore = 0;
         for(int i = 0; i < ArrayLength; i++)
         {
+            //Debug.Log(PileArray[i].Value);
             PileScore = PileScore + PileArray[i].Value;
         }
         Score = PileScore;
+        return(Score);
     }
 
     void DisplayScores()
     {
+        //Debug.Log("Pile 1 Score: " + Pile1ScoreValue.ToString());
         Pile1Score.text = "Pile Score: " + Pile1ScoreValue.ToString();
+        //Debug.Log("Pile 2 Score: " + Pile2ScoreValue.ToString());
         Pile2Score.text = "Pile Score: " + Pile2ScoreValue.ToString();
+        //Debug.Log("Pile 3 Score: " + Pile3ScoreValue.ToString());
         Pile3Score.text = "Pile Score: " + Pile3ScoreValue.ToString();
+        //Debug.Log("Pile 4 Score: " + Pile4ScoreValue.ToString());
         Pile4Score.text = "Pile Score: " + Pile4ScoreValue.ToString();
     }
 
