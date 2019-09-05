@@ -6,8 +6,6 @@ public class Pile2Controller : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        Debug.Log("Discard Flag: " + GameController.Controller.PlayFromDiscardFlag);
-        Debug.Log("Pile Flag: " + GameController.Controller.PlayFromPileFlag);
         if (GameController.Controller.PlayFromDiscardFlag == false && GameController.Controller.PlayFromPileFlag == false)
         {
             GameController.Controller.PlayFromPileFlag = true;

@@ -43,6 +43,16 @@ public class GameController : MonoBehaviour
     public GameObject sourceObj;
     public GameObject targetObj;
 
+    int Pile1ScoreValue;
+    int Pile2ScoreValue;
+    int Pile3ScoreValue;
+    int Pile4ScoreValue;
+
+    public Text Pile1Score;
+    public Text Pile2Score;
+    public Text Pile3Score;
+    public Text Pile4Score;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +95,11 @@ public class GameController : MonoBehaviour
             Pile4Playable = false;
         }
 
+        CalculateScore(Pile1, Pile1Score, Pile1ScoreValue);
+        CalculateScore(Pile2, Pile2Score, Pile2ScoreValue);
+        CalculateScore(Pile3, Pile3Score, Pile3ScoreValue);
+        CalculateScore(Pile4, Pile4Score, Pile4ScoreValue);
+        DisplayScores();
     }
     
 
@@ -133,6 +148,26 @@ public class GameController : MonoBehaviour
         Pile2Playable = false;
         Pile3Playable = false;
         Pile4Playable = false;
+    }
+
+    void CalculateScore(Stack<CardObject> PileStack, Text Display, int Score)
+    {
+        CardObject[] PileArray = PileStack.ToArray();
+        int ArrayLength = PileArray.Length;
+        int PileScore = 0;
+        for(int i = 0; i < ArrayLength; i++)
+        {
+            PileScore = PileScore + PileArray[i].Value;
+        }
+        Score = PileScore;
+    }
+
+    void DisplayScores()
+    {
+        Pile1Score.text = "Pile Score: " + Pile1ScoreValue.ToString();
+        Pile2Score.text = "Pile Score: " + Pile2ScoreValue.ToString();
+        Pile3Score.text = "Pile Score: " + Pile3ScoreValue.ToString();
+        Pile4Score.text = "Pile Score: " + Pile4ScoreValue.ToString();
     }
 
     void Awake()
