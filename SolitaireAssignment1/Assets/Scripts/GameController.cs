@@ -248,7 +248,7 @@ public class GameController : MonoBehaviour
     {
         int ComboScore1 = Mathf.Abs(Pile1ScoreValue - Pile2ScoreValue);
         int ComboScore2 = Mathf.Abs(Pile3ScoreValue - Pile4ScoreValue);
-        int finalScore = Mathf.Abs(ComboScore1 - ComboScore2);
+        int finalScore = Mathf.Abs(ComboScore1 - ComboScore2) + GameDeck.Count;
         return (finalScore);
     }
 
