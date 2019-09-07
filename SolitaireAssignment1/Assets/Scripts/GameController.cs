@@ -214,7 +214,14 @@ public class GameController : MonoBehaviour
     {
         DeckCount.text = "Cards in Deck: " + GameDeck.Count.ToString();
         DiscardCount.text = "Cards in Discard: " + (DiscardPile.Count - 1).ToString();
-        ShuffleCount.text = "Reshuffles Used: " + DeckShuffles.ToString();
+        if (DeckShuffles == 0)
+        {
+            ShuffleCount.text = "Reshuffles Left: 1";
+        }
+        else
+        {
+            ShuffleCount.text = "Reshuffles Left: 0";
+        }
     }
 
     public void PlayFromPile(Stack<CardObject> PileStack, GameObject PileObj, Stack<CardObject> TargetPileStack, GameObject TargetPileObj)
